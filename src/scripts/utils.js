@@ -4,27 +4,28 @@ function addChildren(parentNode, nodesArray) {
 }
 function addStyling(node, stylesObj) {
     // applies styling to the node
+    node.__stylesChanged = true;
     return node;
 }
 function addListeners(node, listenersObj) {
     // change to adding of an attribute and global re-render later
-    for (let listener in listenersObj) {
-        node.addEventListener(listener, listenersObj[listener]);
-    }
+    node.__listeners = listenersObj;
+    node.__listenersChanged = true;
     return node;
 }
 function addAttributes(node, attributesObj) {
+    node.__attributesChanged = true;
     return node;
 }
 
 function addText(node, text) {
     node.innerText = text;
+    node.__innerTextChanged = true;
     return node;
 }
 
 function addNode(node, parentNode) {
     // to be changed to manual adding to the nodes attributes as to an object, with global re-render afterall
-    debugger;
     parentNode.appendChild(node);
     return parentNode;
 }
